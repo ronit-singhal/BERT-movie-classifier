@@ -69,7 +69,7 @@ The training, evaluation, and fine-tuning processes are carried out in `classifi
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/bert-sentiment-analysis.git
+    git clone https://github.com/ronit-singhal/BERT-movie-classifier.git
     cd bert-sentiment-analysis
     ```
 
