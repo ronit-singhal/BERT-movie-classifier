@@ -70,7 +70,7 @@ The training, evaluation, and fine-tuning processes are carried out in `classifi
 
     ```bash
     git clone https://github.com/ronit-singhal/BERT-movie-classifier.git
-    cd bert-sentiment-analysis
+    cd BERT-movie-classifier
     ```
 
 2. Install dependencies:
