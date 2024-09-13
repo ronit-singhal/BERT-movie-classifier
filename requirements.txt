@@ -1,0 +1,12 @@
+torch
+gdown
+zipfile
+pandas
+matplotlib
+seaborn
+textblob
+sklearn
+pickle
+fastapi
+uvicorn
+jinja2
