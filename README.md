@@ -26,10 +26,22 @@ This project is divided into several components:
 
 ## Model Architecture
 
-This project employs the **BERT** architecture, which has several key advantages for NLP tasks like sentiment classification:
-1. **Bidirectional Contextualization**: BERT uses a bidirectional transformer, enabling it to understand context from both directions (left and right) of a word in a sentence.
-2. **Pre-trained Model Fine-tuning**: The model is first pre-trained on a large corpus and then fine-tuned on the IMDB movie review dataset, allowing it to leverage a wide understanding of the language while adapting to specific tasks.
-3. **Attention Mechanism**: The transformer architecture, which BERT is based on, makes use of self-attention to capture long-range dependencies in the text.
+In building an architecture for sentiment classification, I designed a model inspired by BERT. This architecture leverages key principles from transformer-based models, making it highly suitable for the text classification task, particularly for understanding the nuanced relationships in sentiment data. Below, I explain why each component of this architecture is essential and how the model is well-suited for the task at hand.
+
+1. **Word and Position Embeddings (BertEmbeddings Class)**
+The model starts with word embeddings and position embeddings, which map input tokens to dense vector representations while encoding their position in the sentence. This is crucial for sentiment analysis, where word order and context can significantly affect the meaning (e.g., "not great" vs. "great"). Layer normalization and dropout ensure stability during training and help prevent overfitting.
+
+2. **Self-Attention Mechanism (BertSelfAttention Class)**
+The self-attention mechanism plays a pivotal role by allowing the model to focus on different parts of a sentence depending on their importance. Multi-head attention helps capture different relationships within the text, enabling a better understanding of the context. For instance, the model can focus on negations or adjectives that are critical for determining sentiment. The attention mechanism ensures that all words in the sentence can influence each other.
+
+3. **Feedforward Layer and Layer Normalization (BertLayer Class)**
+Each transformer layer consists of self-attention followed by a feedforward network. I employed a two-layer fully connected network with a **GELU (Gaussian Error Linear Unit)** activation function, which adds non-linearity to the model. The feedforward layers allow the model to transform and mix the learned information from the attention mechanism, capturing more complex patterns. Layer normalization and residual connections ensure smooth gradient flow, preventing issues like vanishing gradients.
+
+4. **Sequential Transformer Layers (BertModel Class)**
+By stacking several transformer layers, the model can learn hierarchical representations of text. Lower layers might focus on simpler patterns, such as grammatical structure, while higher layers can capture more abstract sentiment patterns. The extended attention mask ensures that padding tokens do not affect the self-attention computations.
+
+5. **Pooling and Classification (BertForSequenceClassification Class)**
+After processing the input through multiple transformer layers, the output is pooled for classification. The first token’s output, corresponding to the special [CLS] token, represents the entire sequence. This pooled output is then fed into a classifier to predict the sentiment
 
 The training, evaluation, and fine-tuning processes are carried out in `classifier.ipynb`.
 
